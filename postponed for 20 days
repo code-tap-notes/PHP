@@ -1,0 +1,13 @@
+$mua = today();
+        foreach ($comments as $comment)
+        {
+        $dateDiff = $mua->diff($comment->updated_at)->days;
+        if($dateDiff>30)
+            {
+                $data = $comment;
+              $comment->updated_at = strtotime( $comment->updated_at."+ 20 days");
+              $data['updated_at'] = $comment->updated_at;
+              $comment->save();
+              
+            }
+        }
