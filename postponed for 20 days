@@ -1,13 +1,10 @@
 $mua = today();
-        foreach ($comments as $comment)
+        foreach ($rdvs as $rdv)
         {
-        $dateDiff = $mua->diff($comment->updated_at)->days;
+        $dateDiff = $mua->diff($rdv->date)->days; (calculate the days different)
         if($dateDiff>30)
             {
-                $data = $comment;
-              $comment->updated_at = strtotime( $comment->updated_at."+ 20 days");
-              $data['updated_at'] = $comment->updated_at;
-              $comment->save();
-              
+              $rdv->date = strtotime( $rdv->date."+ 20 days"); (postponed 20 days)
+              $rdv->save();          
             }
         }
