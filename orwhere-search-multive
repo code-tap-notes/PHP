@@ -1,0 +1,8 @@
+$tochStories = TochStory::where('Title','Like','%'.$search.'%')
+->orWhere('TochContent','Like','%'.$search.'%')
+->orWhere('French','Like','%'.$search.'%')
+->orWhere('English','Like','%'.$search.'%')->orWhere('Chinese','Like','%'.$search.'%')
+->orWhereIn('theme_id',$arrayTheme)->orWhereIn('source_id',$arraySource)->get();
+         
+Session::put('message',count($tochStories).' '.trans('dic.TochStory').'(s) '
+.trans('dic.With').' result(s)  of search "'.$search.'" '.trans('dic.Found'));
