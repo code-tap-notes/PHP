@@ -1,0 +1,28 @@
+public function updateUpcase($properNounId)
+    {
+        $this->AuthLogin();
+        $properNoun = ProperNoun::find($properNounId);
+        $name = trim($properNoun->Name);
+            if(substr($name, 0, 1) == 'ā')
+            {
+            $name = 'Ā'.static::substr($name, 1);
+            }
+            elseif(substr($name, 0, 1) == 'ś')
+            {
+            $name = 'Ś'.static::substr($name, 1);
+            }
+            elseif(substr($name, 0, 1) == 'ṛ')
+            {
+            $name = 'Ṛ'.static::substr($name, 1);
+            }
+             
+            $name = ucfirst(strtolower($name));    
+            
+        $properNoun->update(['Name' => $name]);
+
+         session::put('message',trans('dic.ProperNoun').' '.trans('dic.ChangedUpperCase'));
+        return redirect('/properNouns');
+    }
+     
+   Xem proper noun controller
+   
