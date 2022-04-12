@@ -1,0 +1,57 @@
+<h4> @lang('dic.DeepSearch')</h4>
+</div>
+  <div class="table-responsive">
+  <table class="table table-striped b-t b-light">
+        <thead>
+          <tr >
+          	<th></th>
+            <th class="list">@lang('dic.Manuscript') @lang('dic.Index')</th>
+            <th class="list">@lang('dic.Number')  @lang('dic.Result')  @lang('dic.Found') </th>
+           
+            <th class="list">@lang('dic.Criteria') @lang('dic.of') @lang('dic.Search')  </th>
+             
+            
+          </tr>
+        </thead>
+        <tbody>
+           
+         @if($result)
+         
+          	@forelse ($result as $key => $value)
+          	
+          	@if($value['search'])
+            <?php
+            $tg = collect($value['index'])->pluck('0');
+            //collect value vào biến trung gian
+            
+            ?>
+          	<tr>
+          	<td>
+          		<input type="checkbox" name="index[]" value={{$tg}}>
+          		
+          	</td>
+          	<td>
+          	         	
+          	@foreach ($value['index'] as $Manuscript)
+          	<a href="{{URL::to('/detailsManuscript/'.$Manuscript['0'])}}"><span class="text-ellipsis">{{$Manuscript['1']}} - </span></a>
+ 			  @endforeach 
+        	</td>
+        	<td>
+        		{{$value['number']}}
+        	</td>
+        	<td>
+        		{{$value['search']}}
+        	</td>
+        	</tr> 
+        	@endif
+        	@empty
+          	<p> No @lang('dic.Result')</p>
+          	@endforelse  
+         
+          @endif
+        </tbody>
+  </table>
+   <button type="submit" class="btn btn-info bigBtn" style="width: 110px;"> <span class="glyphicon glyphicon-search"></span> @lang('dic.MultiSearch') </button>
+ </div>
+</div>
+Xem frontManuscript/searchIndex.blade.php
